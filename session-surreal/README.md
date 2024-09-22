@@ -17,12 +17,18 @@ To include the required dependencies, add the following to your Cargo.toml :
 [dependencies]
 # ...
 serde = { version = "1", optional = true }
-surrealdb = { version = "1.5.4", optional = true }
+surrealdb = { version = "2.0.1", optional = true }
 once_cell = { version = "1.19.0", optional = true }
-tower-sessions = { version = "0.12.3", optional = true }
-tower-sessions-surrealdb-store = { version = "0.4.0", optional = true }
+tower-sessions = { version = "0.13.0", optional = true }
+tower-sessions-surrealdb-store = { version = "0.5.0", optional = true }
 ```
 
 ## How It Works
 
-In this example, the session handler initializes a session store using SurrealDB, where session data is saved and cleaned up periodically. The session management is handled by a session layer, which includes options like session expiry on inactivity and whether to secure session cookies. Additionally, the application sets up a database layer that provides access to the SurrealDB state across routes. The `main.rs` file combines both the session and database services, integrating them into Axum’s routing system with support for handling Leptos routes and error handling. Also, edit the [template](./template.env) environment for the database.
+In this example, the session handler initializes a session store using SurrealDB, where session data is saved and cleaned up periodically. The session management is handled by a session layer, which includes options like session expiry on inactivity and whether to secure session cookies. Additionally, the application sets up a database layer that provides access to the SurrealDB state across routes. The `main.rs` file combines both the session and database services, integrating them into Axum’s routing system with support for handling Leptos routes and error handling.
+
+## How to Launch
+
+1. **Fill the `.env` File** : Start by creating a `.env` file based on the provided [template.env](./template.env). Customize it with your own settings for the database connection, session secrets, and other configurations.
+2. **Start SurrealDB** : Launch your SurrealDB instance using the desired configuration, ensuring it's accessible based on your .env settings.
+3. **Run the Application** : Once the environment and database are ready, simply use the following command to start the application:

@@ -26,6 +26,7 @@ pub async fn new_session() -> Result<(), ServerFnError> {
 
     let jwt = db.login().await?;
     session.insert(SESSION_TOKEN_KEY, jwt).await?;
+    db.as_root_server().await?;
 
     leptos_axum::redirect("/dashboard");
     Ok(())
@@ -43,6 +44,7 @@ pub async fn delete_session() -> Result<(), ServerFnError> {
     db.logout().await?;
     session.clear().await;
     // session.delete().await?;
+    db.as_root_server().await?;
 
     leptos_axum::redirect("/");
     Ok(())

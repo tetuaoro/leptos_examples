@@ -38,9 +38,9 @@ pub async fn initiate() -> AppResult<()> {
 
     let mut root_token = ROOT_TOKEN.lock()?;
     *root_token = token;
-    logging::debug_warn!("ROOT TOKEN SAVED SUCCESSFUL");
+    logging::debug_warn!("ROOT TOKEN SAVED DONE");
 
-    logging::debug_warn!("DB INITIALIZE SUCCESSFUL");
+    logging::debug_warn!("DB INITIALIZE DONE");
     Ok(())
 }
 

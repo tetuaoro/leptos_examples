@@ -1,7 +1,5 @@
-use crate::{
-    api::{exist_session, NewSession},
-    errors::{AppError, ErrorTemplate},
-};
+use crate::api::*;
+use crate::errors::{AppError, ErrorTemplate};
 use leptos::*;
 use leptos_meta::*;
 use leptos_router::*;
@@ -40,9 +38,10 @@ fn HomePage() -> impl IntoView {
 
     view! {
         <h1>"Hi, hit button to create a new session !"</h1>
+        <a href="/dashboard">"Goto dashboard page"</a>
         <ActionForm id="new-session-form" action=new_session>
             <button form="new-session-form" type="submit">
-                "New Session"
+                "Log in"
             </button>
         </ActionForm>
     }
@@ -50,6 +49,7 @@ fn HomePage() -> impl IntoView {
 
 #[component]
 fn DashboardPage() -> impl IntoView {
+    let delete_session = create_server_action::<DeleteSession>();
     let resource = create_resource(|| (), move |_| async { exist_session().await.ok() });
 
     let exist_session = move || {
@@ -62,7 +62,12 @@ fn DashboardPage() -> impl IntoView {
     view! {
         <Suspense>
             <Show when=exist_session fallback=RedirectToHomePage>
-                <p>"A session exist !"</p>
+                <h1>"A session exist !"</h1>
+                <ActionForm id="delete-session-form" action=delete_session>
+                    <button form="delete-session-form" type="submit">
+                        "Log out"
+                    </button>
+                </ActionForm>
             </Show>
         </Suspense>
     }
@@ -71,7 +76,7 @@ fn DashboardPage() -> impl IntoView {
 #[component]
 fn RedirectToHomePage() -> impl IntoView {
     view! {
-        <p>"Please log in !"</p>
-        <a href="/">"Log in"</a>
+        <h2>"Please first log in !"</h2>
+        <a href="/">"Goto home page"</a>
     }
 }
