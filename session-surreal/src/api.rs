@@ -26,8 +26,8 @@ pub async fn new_session() -> Result<()> {
     let db = extract::<DatabaseState>().await?;
     let session = extract::<Session>().await?;
 
-    let jwt = db.login().await?;
-    session.insert(SESSION_TOKEN_KEY, jwt).await?;
+    let token = db.login().await?;
+    session.insert(SESSION_TOKEN_KEY, token).await?;
     db.as_root_server().await?;
 
     leptos_axum::redirect("/dashboard");
@@ -44,8 +44,7 @@ pub async fn delete_session() -> Result<()> {
     let session = extract::<Session>().await?;
 
     db.logout().await?;
-    session.clear().await;
-    // session.delete().await?;
+    session.clear().await; // or session.delete().await?; to also delete the token in database
     db.as_root_server().await?;
 
     leptos_axum::redirect("/");

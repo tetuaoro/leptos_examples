@@ -63,6 +63,7 @@ fn DashboardPage() -> impl IntoView {
         <Suspense>
             <Show when=exist_session fallback=RedirectToHomePage>
                 <h1>"A session exist !"</h1>
+                <p>"Open your browser console to check the cookie token."</p>
                 <ActionForm id="delete-session-form" action=delete_session>
                     <button form="delete-session-form" type="submit">
                         "Log out"

@@ -1,5 +1,4 @@
-Leptos examples
+# Leptos Examples
 
-- 1. postman
-- 2. cache response
-- 3. session with database
+1. [Cache response](./cache-response/)
+2. [Session with database](./session-surreal/)

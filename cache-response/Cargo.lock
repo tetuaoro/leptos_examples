@@ -205,7 +205,7 @@ checksum = "428d9aa8fbc0670b7b8d6030a7fadd0f86151cae55e4dbbece15f3780a3dfaf3"
 
 [[package]]
 name = "cache-response"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "axum",
  "cached 0.53.1",

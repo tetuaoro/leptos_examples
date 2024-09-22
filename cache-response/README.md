@@ -24,3 +24,12 @@ once_cell = { version = "1.19.0", optional = true }
 
 When a request is made, the URI is checked against the in-memory cache. If found, the cached response is returned. If the request isn't cached, the `Content-Type` header is checked. If it matches a predefined asset type, the response is cached for future requests.
 Responses for cached assets are tagged with `x-cache-status` to `HIT` and `cache-control` to `public, max-age=31536000` headers to optimize client-side caching.
+
+
+## How to Launch
+
+1. **Run the Application** : Simply use the following command to start the application :
+
+```bash
+cargo-leptos serve
+```

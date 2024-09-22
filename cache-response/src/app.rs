@@ -16,7 +16,7 @@ pub fn App() -> impl IntoView {
         <Stylesheet id="leptos" href="/pkg/cache-response.css"/>
 
         // sets the document title
-        <Title text="Welcome to Leptos"/>
+        <Title text="Welcome to Cache Response Example"/>
 
         // content for this welcome page
         <Router fallback=|| {
@@ -44,7 +44,9 @@ fn HomePage() -> impl IntoView {
     let on_click = move |_| set_count.update(|count| *count += 1);
 
     view! {
-        <h1>"Welcome to Leptos!"</h1>
+        <h1>"Cache response !"</h1>
+        <p>"Reload the page and open your browser console to check the code status for js, css and wasm files !"</p>
+        <p>"Expected to equal 206 and Cached-Control to equal 1 year."</p>
         <button on:click=on_click>"Click Me: " {count}</button>
     }
 }
