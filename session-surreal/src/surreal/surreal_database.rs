@@ -1,16 +1,22 @@
-use crate::config::*;
-use crate::errors::AppResult;
-use axum::{async_trait, extract::FromRequestParts};
+use crate::errors::*;
+use crate::utils::config::*;
+use axum::{async_trait, extract::FromRequestParts, Extension};
 use http::{request::Parts, StatusCode};
 use leptos::logging;
 use once_cell::sync::Lazy;
 use serde::{Deserialize, Serialize};
-use std::sync::Mutex;
-use std::{ops::Deref, sync::Arc};
+use std::{
+    ops::Deref,
+    sync::{Arc, Mutex},
+};
 use surrealdb::{
     engine::remote::ws::{Client, Ws},
     opt::auth::{Jwt, Root},
     Connection, Surreal,
+};
+use tower::{
+    layer::util::{Identity, Stack},
+    ServiceBuilder,
 };
 
 #[derive(Clone, Serialize, Deserialize)]
@@ -114,4 +120,14 @@ impl<C: Connection> DatabaseProvider for Surreal<C> {
         self.authenticate(token).await?;
         Ok(())
     }
+}
+
+pub type DatabaseService = ServiceBuilder<Stack<Extension<DatabaseState>, Identity>>;
+
+pub async fn database() -> Result<DatabaseService, AppError> {
+    let db = DB.clone();
+    let state = DatabaseState::new(Arc::new(db));
+    let extension = Extension(state);
+    let database_service = ServiceBuilder::new().layer(extension);
+    Ok(database_service)
 }

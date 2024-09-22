@@ -1,13 +1,12 @@
 mod api;
 pub mod app;
-mod config;
 pub mod errors;
 #[cfg(feature = "ssr")]
 pub mod fileserv;
 #[cfg(feature = "ssr")]
-pub mod surreal_database;
+pub mod surreal;
 #[cfg(feature = "ssr")]
-pub mod surreal_session;
+pub mod utils;
 
 #[cfg(feature = "hydrate")]
 #[wasm_bindgen::prelude::wasm_bindgen]

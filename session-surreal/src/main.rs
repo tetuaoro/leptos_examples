@@ -6,8 +6,7 @@ async fn main() {
     use leptos_axum::{generate_route_list, LeptosRoutes};
     use session_surreal::app::*;
     use session_surreal::fileserv::file_and_error_handler;
-    use session_surreal::surreal_database::*;
-    use session_surreal::surreal_session::*;
+    use session_surreal::surreal;
 
     // Setting get_configuration(None) means we'll be using cargo-leptos's env values
     // For deployment these variables are:
@@ -20,9 +19,11 @@ async fn main() {
     let routes = generate_route_list(App);
 
     // Initiate database
-    initiate().await.expect("couldn't initiate database");
-    let session_service = handler().await.expect("session failure");
-    let database_service = database().await.expect("database failure");
+    surreal::initiate()
+        .await
+        .expect("couldn't initiate database");
+    let session_service = surreal::handler().await.expect("session failure");
+    let database_service = surreal::database().await.expect("database failure");
 
     // build our application with a route
     let app = Router::new()

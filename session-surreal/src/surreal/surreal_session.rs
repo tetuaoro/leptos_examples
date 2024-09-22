@@ -1,7 +1,5 @@
+use super::surreal_database as surreal;
 use crate::errors::AppError;
-use crate::surreal_database as surreal;
-use axum::Extension;
-use std::sync::Arc;
 use surrealdb::engine::remote::ws::Client;
 use tower::{
     layer::util::{Identity, Stack},
@@ -24,14 +22,4 @@ pub async fn handler() -> Result<SessionService, AppError> {
         .with_expiry(Expiry::OnInactivity(Duration::minutes(10)));
     let session_service = ServiceBuilder::new().layer(session_layer);
     Ok(session_service)
-}
-
-pub type DatabaseService = ServiceBuilder<Stack<Extension<surreal::DatabaseState>, Identity>>;
-
-pub async fn database() -> Result<DatabaseService, AppError> {
-    let db = surreal::DB.clone();
-    let state = surreal::DatabaseState::new(Arc::new(db));
-    let extension = Extension(state);
-    let database_service = ServiceBuilder::new().layer(extension);
-    Ok(database_service)
 }

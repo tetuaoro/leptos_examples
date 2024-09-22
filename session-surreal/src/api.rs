@@ -1,9 +1,11 @@
 use leptos::*;
 
+type Result<T> = std::result::Result<T, ServerFnError>;
+
 #[server(endpoint = "exist")]
-pub async fn exist_session() -> Result<bool, ServerFnError> {
-    use crate::config::SESSION_TOKEN_KEY;
-    use crate::surreal_database::Token;
+pub async fn exist_session() -> Result<bool> {
+    use crate::surreal::Token;
+    use crate::utils::config::SESSION_TOKEN_KEY;
     use leptos_axum::extract;
     use tower_sessions::Session;
 
@@ -15,9 +17,9 @@ pub async fn exist_session() -> Result<bool, ServerFnError> {
 }
 
 #[server(endpoint = "login")]
-pub async fn new_session() -> Result<(), ServerFnError> {
-    use crate::config::SESSION_TOKEN_KEY;
-    use crate::surreal_database::DatabaseState;
+pub async fn new_session() -> Result<()> {
+    use crate::surreal::DatabaseState;
+    use crate::utils::config::SESSION_TOKEN_KEY;
     use leptos_axum::extract;
     use tower_sessions::Session;
 
@@ -33,8 +35,8 @@ pub async fn new_session() -> Result<(), ServerFnError> {
 }
 
 #[server(endpoint = "logout")]
-pub async fn delete_session() -> Result<(), ServerFnError> {
-    use crate::surreal_database::DatabaseState;
+pub async fn delete_session() -> Result<()> {
+    use crate::surreal::DatabaseState;
     use leptos_axum::extract;
     use tower_sessions::Session;
 
