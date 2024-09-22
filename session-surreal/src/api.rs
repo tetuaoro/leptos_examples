@@ -11,7 +11,7 @@ pub async fn exist_session() -> Result<bool, ServerFnError> {
 
     let token = session.get::<Token>(SESSION_TOKEN_KEY).await?;
 
-    Ok(Option::is_some(&token)) // also check token is valide
+    Ok(Option::is_some(&token)) // also check if token is valide
 }
 
 #[server(endpoint = "login")]
