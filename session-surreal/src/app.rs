@@ -17,11 +17,8 @@ pub fn App() -> impl IntoView {
     };
 
     view! {
-        <Stylesheet id="leptos" href="/pkg/session-surreal.css"/>
-
-        // sets the document title
         <Title text="Welcome to Session Surreal Example"/>
-
+        <Stylesheet id="leptos" href="/pkg/session-surreal.css"/>
 
         // content for this welcome page
         <Router>
@@ -41,8 +38,8 @@ fn HomePage() -> impl IntoView {
     let new_session = ServerAction::<NewSession>::new();
 
     view! {
-        <h1>"Hi, hit button to create a new session !"</h1>
-        <a href="/dashboard">"Goto dashboard page"</a>
+        <h1>"Hi, hit the button « Log in » to create a new session !"</h1>
+        <A href="/dashboard">"Goto dashboard page"</A>
         <ActionForm action=new_session>
             <button type="submit">
                 "Log in"
@@ -82,7 +79,7 @@ fn DashboardPage() -> impl IntoView {
 fn RedirectToHomePage() -> impl IntoView {
     view! {
         <h2>"Please first log in !"</h2>
-        <a href="/">"Goto home page"</a>
+        <A href="/">"Goto home page"</A>
     }
 }
 
