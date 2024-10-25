@@ -16,8 +16,8 @@ To include the required dependencies, add the following to your `Cargo.toml` :
 ```toml
 [dependencies]
 # ...
-cached = { version = "0.53.1", features = ["async"], optional = true }
 once_cell = { version = "1.19.0", optional = true }
+cached = { version = "0.53.1", features = ["async"], optional = true }
 ```
 
 ### How It Works

@@ -1,5 +1,5 @@
 use http::status::StatusCode;
-use leptos::*;
+use leptos::prelude::*;
 use std::env::VarError;
 #[cfg(feature = "ssr")]
 use std::sync::PoisonError;
@@ -38,7 +38,7 @@ pub fn ErrorTemplate(
     #[prop(optional)] errors: Option<RwSignal<Errors>>,
 ) -> impl IntoView {
     let errors = match outside_errors {
-        Some(e) => create_rw_signal(e),
+        Some(e) => RwSignal::new(e),
         None => match errors {
             Some(e) => e,
             None => panic!("No Errors found and we expected errors!"),

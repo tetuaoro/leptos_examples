@@ -1,4 +1,4 @@
-use leptos::*;
+use leptos::prelude::*;
 
 type Result<T> = std::result::Result<T, ServerFnError>;
 

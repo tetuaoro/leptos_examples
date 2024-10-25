@@ -1,13 +1,20 @@
 use crate::api::*;
 use crate::errors::{AppError, ErrorTemplate};
-use leptos::*;
+use leptos::prelude::*;
 use leptos_meta::*;
-use leptos_router::*;
+use leptos_router::components::*;
+use leptos_router::path;
 
 #[component]
 pub fn App() -> impl IntoView {
     // Provides context that manages stylesheets, titles, meta tags, etc.
     provide_meta_context();
+
+    let error_fallback = || {
+        let mut outside_errors = Errors::default();
+        outside_errors.insert_with_default_key(AppError::NotFound);
+        view! { <ErrorTemplate outside_errors/> }.into_view()
+    };
 
     view! {
         <Stylesheet id="leptos" href="/pkg/session-surreal.css"/>
@@ -15,16 +22,13 @@ pub fn App() -> impl IntoView {
         // sets the document title
         <Title text="Welcome to Session Surreal Example"/>
 
+
         // content for this welcome page
-        <Router fallback=|| {
-            let mut outside_errors = Errors::default();
-            outside_errors.insert_with_default_key(AppError::NotFound);
-            view! { <ErrorTemplate outside_errors/> }.into_view()
-        }>
+        <Router>
             <main>
-                <Routes>
-                    <Route path="" view=HomePage/>
-                    <Route path="/dashboard" view=DashboardPage/>
+                <Routes fallback=error_fallback>
+                    <Route path=path!("") view=HomePage/>
+                    <Route path=path!("/dashboard") view=DashboardPage/>
                 </Routes>
             </main>
         </Router>
@@ -34,13 +38,13 @@ pub fn App() -> impl IntoView {
 /// Renders the home page of your application.
 #[component]
 fn HomePage() -> impl IntoView {
-    let new_session = create_server_action::<NewSession>();
+    let new_session = ServerAction::<NewSession>::new();
 
     view! {
         <h1>"Hi, hit button to create a new session !"</h1>
         <a href="/dashboard">"Goto dashboard page"</a>
-        <ActionForm id="new-session-form" action=new_session>
-            <button form="new-session-form" type="submit">
+        <ActionForm action=new_session>
+            <button type="submit">
                 "Log in"
             </button>
         </ActionForm>
@@ -49,8 +53,8 @@ fn HomePage() -> impl IntoView {
 
 #[component]
 fn DashboardPage() -> impl IntoView {
-    let delete_session = create_server_action::<DeleteSession>();
-    let resource = create_resource(|| (), move |_| async { exist_session().await.ok() });
+    let delete_session = ServerAction::<DeleteSession>::new();
+    let resource = Resource::new(|| (), move |_| async { exist_session().await.ok() });
 
     let exist_session = move || {
         if let Some(Some(exist)) = resource.get() {
@@ -64,8 +68,8 @@ fn DashboardPage() -> impl IntoView {
             <Show when=exist_session fallback=RedirectToHomePage>
                 <h1>"A session exist !"</h1>
                 <p>"Open your browser console to check the cookie token."</p>
-                <ActionForm id="delete-session-form" action=delete_session>
-                    <button form="delete-session-form" type="submit">
+                <ActionForm action=delete_session>
+                    <button type="submit">
                         "Log out"
                     </button>
                 </ActionForm>
@@ -79,5 +83,23 @@ fn RedirectToHomePage() -> impl IntoView {
     view! {
         <h2>"Please first log in !"</h2>
         <a href="/">"Goto home page"</a>
+    }
+}
+
+pub fn shell(options: LeptosOptions) -> impl IntoView {
+    view! {
+        <!DOCTYPE html>
+        <html lang="en">
+            <head>
+                <meta charset="utf-8"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1"/>
+                <AutoReload options=options.clone() />
+                <HydrationScripts options/>
+                <MetaTags/>
+            </head>
+            <body>
+                <App/>
+            </body>
+        </html>
     }
 }

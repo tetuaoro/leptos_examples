@@ -29,7 +29,7 @@ In this example, the session handler initializes a session store using SurrealDB
 
 ## How to Launch
 
-1. **Fill the `.env` File** : Start by creating a `.env` file based on the provided [template.env](./template.env). Customize it with your own settings for the database connection, session secrets, and other configurations.
+1. **Fill the `.env` File** : Start by creating a `.env` file based on the provided [TEMPLATE.env](./TEMPLATE.env). Customize it with your own settings for the database connection, session secrets, and other configurations.
 2. **Start SurrealDB** : Launch your SurrealDB instance using the desired configuration, ensuring it's accessible based on your .env settings.
 3. **Run the Application** : Once the environment and database are ready, simply use the following command to start the application :
 
