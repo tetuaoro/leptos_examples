@@ -8,7 +8,7 @@ use axum::{
 };
 use cached::proc_macro::cached;
 use cached::{Cached, SizedCache};
-use once_cell::sync::Lazy;
+use std::sync::LazyLock as Lazy;
 
 static ASSETS_TYPE: Lazy<Vec<&str>> =
     Lazy::new(|| vec!["css", "javascript", "wasm", "webp", "ttf", "x-icon"]);

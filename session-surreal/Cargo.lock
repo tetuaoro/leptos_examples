@@ -3686,7 +3686,7 @@ dependencies = [
 
 [[package]]
 name = "session-surreal"
-version = "0.3.0"
+version = "0.3.1"
 dependencies = [
  "axum",
  "console_error_panic_hook",
@@ -3695,7 +3695,6 @@ dependencies = [
  "leptos_axum",
  "leptos_meta",
  "leptos_router",
- "once_cell",
  "serde",
  "surrealdb",
  "thiserror",

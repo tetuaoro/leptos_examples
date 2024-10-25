@@ -223,7 +223,7 @@ checksum = "428d9aa8fbc0670b7b8d6030a7fadd0f86151cae55e4dbbece15f3780a3dfaf3"
 
 [[package]]
 name = "cache-response"
-version = "0.2.0"
+version = "0.2.1"
 dependencies = [
  "axum",
  "cached",
@@ -233,7 +233,6 @@ dependencies = [
  "leptos_axum",
  "leptos_meta",
  "leptos_router",
- "once_cell",
  "thiserror",
  "tokio",
  "tower 0.5.1",
