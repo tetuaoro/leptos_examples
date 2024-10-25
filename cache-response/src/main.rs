@@ -5,7 +5,7 @@ async fn main() {
     use axum::Router;
     use cache_response::app::*;
     use cache_response::cache;
-    use leptos::logging as Logging;
+    use leptos::logging as console;
     use leptos::prelude::*;
     use leptos_axum::{generate_route_list, LeptosRoutes};
 
@@ -30,7 +30,7 @@ async fn main() {
         .with_state(leptos_options);
 
     let listener = tokio::net::TcpListener::bind(&addr).await.unwrap();
-    Logging::log!("listening on http://{}", &addr);
+    console::log!("listening on http://{}", &addr);
     axum::serve(listener, app.into_make_service())
         .await
         .unwrap();

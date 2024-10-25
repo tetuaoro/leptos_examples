@@ -1,12 +1,13 @@
 #[cfg(feature = "ssr")]
 #[tokio::main]
 async fn main() {
-    use axum::Router;
+    use axum::{middleware as AxumMiddleware, Router};
     use leptos::logging as console;
     use leptos::prelude::*;
     use leptos_axum::{generate_route_list, LeptosRoutes};
-    use session_surreal::app::*;
-    use session_surreal::surreal;
+    use protected_routes::app::*;
+    use protected_routes::proutes;
+    use protected_routes::surreal;
 
     // Setting get_configuration(None) means we'll be using cargo-leptos's env values
     // For deployment these variables are:
@@ -32,6 +33,7 @@ async fn main() {
             move || shell(leptos_options.clone())
         })
         .fallback(leptos_axum::file_and_error_handler(shell))
+        .layer(AxumMiddleware::from_fn(proutes::handler))
         .layer(session_service)
         .layer(database_service)
         .with_state(leptos_options);

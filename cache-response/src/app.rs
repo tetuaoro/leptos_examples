@@ -19,14 +19,8 @@ pub fn App() -> impl IntoView {
     };
 
     view! {
-
-
-        // injects a stylesheet into the document <head>
-        // id=leptos means cargo-leptos will hot-reload this stylesheet
-        <Stylesheet id="leptos" href="/pkg/cache-response.css"/>
-
-        // sets the document title
         <Title text="Welcome to Cache Response Example"/>
+        <Stylesheet id="leptos" href="/pkg/cache-response.css"/>
 
         // content for this welcome page
         <Router>
