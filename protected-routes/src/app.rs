@@ -50,6 +50,7 @@ fn HomePage() -> impl IntoView {
         <ActionForm action=get_secret>
             <button type="submit">"Get secret using middleware"</button>
         </ActionForm>
+        <A href="/secret">"Show me the secret (A)"</A>
         <div>
             <p style="color:red;">"The secret is : "<code>{secret}</code></p>
         </div>
