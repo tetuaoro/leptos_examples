@@ -1,0 +1,8 @@
+[build]
+target = "./index.html"
+minify = "on_release"
+
+[serve]
+port = 1420
+open = false
+ws_protocol = "ws"
