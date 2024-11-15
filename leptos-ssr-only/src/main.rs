@@ -14,7 +14,7 @@ async fn main() {
     dbg!(server_fn::axum::server_fn_paths().collect::<Vec<_>>());
 
     let app = Router::new().route(
-        "/api/*fn_name",
+        "/*fn_name",
         axum::routing::any(leptos_axum::handle_server_fns),
     );
 
