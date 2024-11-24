@@ -7,9 +7,9 @@ edition = "2021"
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-axum = { version = "0.7" }
-leptos = { version = "0.7.0-rc1" } # also works if add `ssr` feature
-leptos_axum = { version = "0.7.0-rc1" }
+axum = "0.7"
+leptos = "0.7.0-rc1" # also works if add `ssr` feature
+leptos_axum = "0.7.0-rc1"
 #
 tokio = { version = "1", features = ["rt-multi-thread"] }
 #
