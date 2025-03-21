@@ -7,5 +7,4 @@ pkg
 **/*.rs.bk
 
 #
-/dist
-/.vscode
+.vscode

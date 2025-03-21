@@ -12,9 +12,7 @@ pub fn App() -> impl IntoView {
     let error_fallback = || {
         let mut outside_errors = Errors::default();
         outside_errors.insert_with_default_key(AppError::NotFound);
-        view! {
-            <ErrorTemplate outside_errors/>
-        }
+        view! { <ErrorTemplate outside_errors/> }
         .into_view()
     };
 
@@ -50,12 +48,12 @@ fn HomePage() -> impl IntoView {
 
 pub fn shell(options: LeptosOptions) -> impl IntoView {
     view! {
-        <!DOCTYPE html>
+        <!DOCTYPE html> 
         <html lang="en">
             <head>
                 <meta charset="utf-8"/>
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-                <AutoReload options=options.clone() />
+                <AutoReload options=options.clone()/>
                 <HydrationScripts options/>
                 <MetaTags/>
             </head>

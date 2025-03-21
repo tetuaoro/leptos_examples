@@ -52,12 +52,12 @@ fn shell(options: LeptosOptions) -> impl IntoView {
     use protected_routes::app::App;
 
     view! {
-        <!DOCTYPE html>
+        <!DOCTYPE html> 
         <html lang="en">
             <head>
                 <meta charset="utf-8"/>
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-                <AutoReload options=options.clone() />
+                <AutoReload options=options.clone()/>
                 <HydrationScripts options/>
                 <MetaTags/>
             </head>
