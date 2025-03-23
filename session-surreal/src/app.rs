@@ -41,9 +41,7 @@ fn HomePage() -> impl IntoView {
         <h1>"Hi, hit the button « Log in » to create a new session !"</h1>
         <A href="/dashboard">"Goto dashboard page"</A>
         <ActionForm action=new_session>
-            <button type="submit">
-                "Log in"
-            </button>
+            <button type="submit">"Log in"</button>
         </ActionForm>
     }
 }
@@ -66,9 +64,7 @@ fn DashboardPage() -> impl IntoView {
                 <h1>"A session exist !"</h1>
                 <p>"Open your browser console to check the cookie token."</p>
                 <ActionForm action=delete_session>
-                    <button type="submit">
-                        "Log out"
-                    </button>
+                    <button type="submit">"Log out"</button>
                 </ActionForm>
             </Show>
         </Suspense>
@@ -85,12 +81,12 @@ fn RedirectToHomePage() -> impl IntoView {
 
 pub fn shell(options: LeptosOptions) -> impl IntoView {
     view! {
-        <!DOCTYPE html>
+        <!DOCTYPE html> 
         <html lang="en">
             <head>
                 <meta charset="utf-8"/>
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-                <AutoReload options=options.clone() />
+                <AutoReload options=options.clone()/>
                 <HydrationScripts options/>
                 <MetaTags/>
             </head>

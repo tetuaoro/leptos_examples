@@ -1,21 +1,22 @@
 [package]
 name = "protected-routes"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2021"
+authors = ["tetuaoro <65575727+tetuaoro@users.noreply.github.com>"]
 
 [lib]
 crate-type = ["cdylib", "rlib"]
 
 [dependencies]
-leptos = { version = "0.7.0-rc1" }
-leptos_meta = { version = "0.7.0-rc1" }
+leptos = { version = "0.7.7" }
+leptos_meta = { version = "0.7.7" }
 axum = { version = "0.7", optional = true }
-leptos_router = { version = "0.7.0-rc1" }
-leptos_axum = { version = "0.7.0-rc1", optional = true }
+leptos_router = { version = "0.7.7" }
+leptos_axum = { version = "0.7.7", optional = true }
 #
 http = "1"
 thiserror = "1"
-wasm-bindgen = "=0.2.95"
+wasm-bindgen = "=0.2.100"
 console_error_panic_hook = "0.1"
 tower = { version = "0.5", optional = true }
 tracing = { version = "0.1", optional = true }

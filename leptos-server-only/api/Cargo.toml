@@ -1,0 +1,10 @@
+[package]
+name = "api"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+
+[dependencies]
+leptos = { workspace = true, features = ["ssr"] }
+axum.workspace = true
+leptos_axum.workspace = true

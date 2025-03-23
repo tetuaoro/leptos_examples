@@ -1,6 +1,6 @@
-# Leptos SSR-Only API with Axum
+# Leptos serve only API functions
 
-This project demonstrates how to use **Leptos** alongside **Axum** as a server-side API only, leveraging the `server` macro from Leptos for lightweight and efficient server-side rendering (SSR) and API building.
+This project demonstrates how to use **Leptos** alongside **Axum** as a server-side API only, leveraging the `server` macro from Leptos for lightweight and efficient server-side rendering (SSR) and API building. This based runs `leptos` and `axum` as server only. The leptos `#[server]` function is great to make a project like this.
 
 ## Features
 
@@ -23,5 +23,6 @@ The Leptos `#[server]` macro provides a simple way to define server-side logic t
 1. **Run the Application** : Simply use the following command to start the application :
 
 ```bash
-cargo run
+cargo build --package=server --bin=server --no-default-features
+LEPTOS_OUTPUT_NAME=raodeploy cargo run --package=server --bin=server --no-default-features
 ```

@@ -42,8 +42,15 @@ fn HomePage() -> impl IntoView {
 
     view! {
         <h1>"Hi, hit the button « Log in » to create a new session !"</h1>
-        <p>"Because the example is "<i>"hydrated"</i>", the link below is an "<code>"<form/>"</code>" element instead of "<code>"<A/>"</code>" component to match the server layer."</p>
-        <form action="/dashboard"><button type="submit" name="uselayer" value="true">"Goto dashboard page"</button></form>
+        <p>
+            "Because the example is " <i>"hydrated"</i> ", the link below is an " <code>"<form/>"</code> " element instead of " <code>"<A/>"</code>
+            " component to match the server layer."
+        </p>
+        <form action="/dashboard">
+            <button type="submit" name="uselayer" value="true">
+                "Goto dashboard page"
+            </button>
+        </form>
         <ActionForm action=new_session>
             <button type="submit">"Log in"</button>
         </ActionForm>
@@ -52,7 +59,7 @@ fn HomePage() -> impl IntoView {
         </ActionForm>
         <A href="/secret">"Show me the secret (A)"</A>
         <div>
-            <p style="color:red;">"The secret is : "<code>{secret}</code></p>
+            <p style="color:red;">"The secret is : " <code>{secret}</code></p>
         </div>
     }
 }
@@ -72,7 +79,11 @@ fn LogoutBtn() -> impl IntoView {
 fn DashboardPage() -> impl IntoView {
     view! {
         <h1>"You match the dashboard page using layer !"</h1>
-        <form action="/secret"><button type="submit" name="usecomponent" value="true">"Show me the secret now (form)"</button></form>
+        <form action="/secret">
+            <button type="submit" name="usecomponent" value="true">
+                "Show me the secret now (form)"
+            </button>
+        </form>
         <A href="/secret">"Show me the secret (A)"</A>
         <LogoutBtn/>
     }
@@ -85,9 +96,7 @@ fn SecretProtectedRoute() -> impl MatchNestedRoutes + Clone {
     let resource = Resource::new(|| (), move |_| async { exist_session().await.ok() });
     let is_auth = move || resource.get().flatten();
 
-    view! {
-        <ProtectedRoute path=path!("/secret") view=SecretPage condition=is_auth redirect_path=|| "/this/path/does/not/exist" ssr=SsrMode::Async/>
-    }
+    view! { <ProtectedRoute path=path!("/secret") view=SecretPage condition=is_auth redirect_path=|| "/this/path/does/not/exist" ssr=SsrMode::Async/> }
     .into_inner()
 }
 
