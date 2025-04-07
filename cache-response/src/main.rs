@@ -26,7 +26,7 @@ async fn main() {
             move || shell(leptos_options.clone())
         })
         .fallback(leptos_axum::file_and_error_handler(shell))
-        .layer(AxumMiddleware::from_fn(cache::handler))
+        .layer(AxumMiddleware::from_fn(cache::handle))
         .with_state(leptos_options);
 
     let listener = tokio::net::TcpListener::bind(&addr).await.unwrap();

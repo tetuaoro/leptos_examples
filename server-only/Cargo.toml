@@ -20,5 +20,6 @@ leptos_axum = { version = "0.7.7" }
 axum = "0.7"
 tokio = { version = "1.33.0", features = ["full"] }
 
+# run cargo build --package=server --no-default-features --features=ssr
 [[workspace.metadata.leptos]]
-name = "leptosserveronly"
+name = "serveronly"
